@@ -108,6 +108,21 @@ class Gpio implements GpioInterface
 
         return $this;
     }
+    
+    /**
+     * Get current pin value
+     * 
+     * @param int   $pinNo
+     * @return boolean|string GPIO value
+     */
+    public function read($pinNo)
+    {
+        if (!$this->isValidPin($pinNo)) {
+            return false;
+        }
+        
+        return trim(file_get_contents(GpioInterface::PATH_GPIO.$pinNo.'/value'));
+    }
 
     /**
      * Get input value
